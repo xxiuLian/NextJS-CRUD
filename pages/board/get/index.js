@@ -3,8 +3,11 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
 import ProgressBar from "../../ProgressBar";
+import { useSession } from "next-auth/react";
 
 const Get = () => {
+  const session = useSession();
+
   const router = useRouter();
   const [current, setCurrent] = useState(1);
   const [boardData, setBoardData] = useState([]);
@@ -22,7 +25,6 @@ const Get = () => {
         if (res.data.code === "2000") {
           const list = res.data.data.list;
           setBoardData(list);
-          console.log(list);
         }
       })
       .catch((err) => {
@@ -37,39 +39,43 @@ const Get = () => {
   }, []);
   return (
     <div className="list-bg">
-      <div className="list-item">
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>제목</th>
-              <th>작성자</th>
-              <th>작성일</th>
-            </tr>
-          </thead>
-          <tbody>
-            {boardData.map((data, i) => {
-              return data.isDelete === "N" ? (
-                <tr key={i}>
-                  <td>{data.boardId}</td>
-                  <td
-                    onClick={() => {
-                      router.push({
-                        pathname: `/board/get/${data.boardId}`,
-                      });
-                    }}
-                  >
-                    {data.boardTitle}
-                  </td>
+      {session.data != null ? (
+        <div className="list-item">
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              {boardData.map((data, i) => {
+                return data.isDelete === "N" ? (
+                  <tr key={i}>
+                    <td>{data.boardId}</td>
+                    <td
+                      onClick={() => {
+                        router.push({
+                          pathname: `/board/get/${data.boardId}`,
+                        });
+                      }}
+                    >
+                      {data.boardTitle}
+                    </td>
 
-                  <td>{data.userId}</td>
-                  <td>{data.boardRegDate}</td>
-                </tr>
-              ) : null;
-            })}
-          </tbody>
-        </table>
-      </div>
+                    <td>{data.userId}</td>
+                    <td>{data.boardRegDate}</td>
+                  </tr>
+                ) : null;
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <h2>로그인 하시오 로그인</h2>
+      )}
     </div>
   );
 };

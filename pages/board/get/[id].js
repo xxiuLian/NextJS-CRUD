@@ -2,11 +2,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Detail = (props) => {
+  const session = useSession();
+  console.log(session);
+
   const [board, setBoard] = useState([]);
   const router = useRouter();
-  console.log(router);
 
   const getOneData = async () => {
     const data = axios.get(
@@ -31,8 +34,16 @@ const Detail = (props) => {
       <h4>작성자 : {board.userId}</h4>
       <p>{board.boardContent}</p>
       <p>{board.boardRegDate}</p>
-      <Link href={`/board/update/${router.query.id}`}>수정</Link>
-      <Link href={`/board/delete/${router.query.id}`}>삭제</Link>
+      {board.userId ===
+      session.data.user.email.substring(
+        0,
+        session.data.user.email.indexOf("@")
+      ) ? (
+        <div>
+          <Link href={`/board/update/${router.query.id}`}>수정</Link>
+          <Link href={`/board/delete/${router.query.id}`}>삭제</Link>
+        </div>
+      ) : null}
     </div>
   );
 };

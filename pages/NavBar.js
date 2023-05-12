@@ -25,18 +25,22 @@ export default function NavBar() {
           <a className={router.pathname === "/about" ? "active" : ""}>About</a>
         </Link>
         <Link
-          href={{ pathname: "/board/get", query: { page: 1, size: 4 } }}
+          href={{ pathname: "/board/get", query: { page: 1, size: 10 } }}
           legacyBehavior
         >
           <a className={router.pathname === "/board/get" ? "active" : ""}>
             List
           </a>
         </Link>
-        <Link href="/board/boardForm" legacyBehavior>
-          <a className={router.pathname === "/board/boardform" ? "active" : ""}>
-            BoardForm
-          </a>
-        </Link>
+        {session.data != null ? (
+          <Link href="/board/boardForm" legacyBehavior>
+            <a
+              className={router.pathname === "/board/boardform" ? "active" : ""}
+            >
+              BoardForm
+            </a>
+          </Link>
+        ) : null}
         {session.data == "" ||
         session.data == null ||
         session.data == undefined ? (
