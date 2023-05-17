@@ -1,19 +1,22 @@
 import { useRouter } from "next/router";
 import Seo from "./Seo";
 import Link from "next/link";
+import { Movie } from "./type";
 
 const API_KEY = process.env.API_KEY;
 
 export default function Home({ results }) {
   const router = useRouter();
-  const onClick = (id, title) => {
+  const onClick = (id: number, title: string) => {
     router.push(`/movies/${title}/${id}`);
   };
+
+  console.log(results);
 
   return (
     <div className="container">
       <Seo title="HOME" />
-      {results?.map((movie) => (
+      {results?.map((movie: Movie) => (
         <div
           onClick={() => onClick(movie.id, movie.original_title)}
           className="movie"

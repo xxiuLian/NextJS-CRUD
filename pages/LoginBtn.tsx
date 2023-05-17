@@ -1,6 +1,7 @@
 "use client";
 import { signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { Visible } from "./type";
 
 const LoginBtn = ({ session }) => {
   const [visible, setVisible] = useState(false);

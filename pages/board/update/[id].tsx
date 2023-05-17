@@ -3,15 +3,18 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
+import { UpdateFormGetData } from "../../type";
 
 const UpdateForm = () => {
   const router = useRouter();
   const [updateBoard, setUpdateBoard] = useState([]);
+  // const [updateBoard, setUpdateBoard] = useState<UpdateFormGetData[]>([]);
 
-  useEffect(() => {
-    const initialValue = getUpdateData();
-    setUpdateBoard(initialValue);
-  }, []);
+  // useEffect(() => {
+  //   const initialValue = getUpdateData();
+  //   console.log("dfadfsdf", initialValue);
+  //   setUpdateBoard(initialValue);
+  // }, []);
   const {
     register,
     handleSubmit,
@@ -26,7 +29,7 @@ const UpdateForm = () => {
     setValue("boardContent", updateBoard.boardContent);
   }, [updateBoard, setValue]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: UpdateFormGetData) => {
     console.log("sdfsdfsd");
     console.log(data);
     console.log(JSON.stringify(data));
@@ -45,7 +48,7 @@ const UpdateForm = () => {
     await data
       .then((res) => (res = res.data.data))
       .then((data) => {
-        console.log(data);
+        console.log("여기데이터넘넝ㅈ데러먼데", data);
         setUpdateBoard(data);
       });
   };

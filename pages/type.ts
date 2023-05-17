@@ -1,0 +1,32 @@
+//LoginBtn.tsx
+export type Visible = boolean;
+
+//index.tsx
+export type Movie = {
+  id: number;
+  original_title: string;
+  poster_path: string;
+};
+
+//boardForm.tsx
+export type SessionEmail = string;
+
+export type BoardFormInput = {
+  boardTitle: string | number;
+  boardContent: string | number;
+  userId: string;
+};
+
+//update > [id].tsx
+export type UpdateFormGetData = {
+  boardContent: string | number;
+  boardHit: number;
+  boardId: number;
+  boardOrder: number;
+  boardOriginFile: string;
+  boardRegDate: string;
+  boardTitle: string | number;
+  boardUpdateFile: string;
+  isDelete: string;
+  userId: string;
+};

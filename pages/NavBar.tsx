@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../styles/NavBar.module.css";
-import LoginBtn from "../pages/LoginBtn";
+import LoginBtn from "./LoginBtn";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { useEffect } from "react";
@@ -41,9 +41,7 @@ export default function NavBar() {
             </a>
           </Link>
         ) : null}
-        {session.data == "" ||
-        session.data == null ||
-        session.data == undefined ? (
+        {session.data == null || session.data == undefined ? (
           <Register />
         ) : null}
         <LoginBtn session={session} />

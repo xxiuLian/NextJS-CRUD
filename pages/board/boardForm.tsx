@@ -3,12 +3,11 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { SessionEmail, BoardFormInput } from "../type";
 
 const BoardForm = () => {
   let session = useSession();
-  console.log("boardForm", session.data);
-
-  const emailData = session.data.user.email;
+  const emailData: SessionEmail = session.data.user.email;
   const at = emailData.indexOf("@");
   const email = emailData.substring(0, at);
 
@@ -23,8 +22,8 @@ const BoardForm = () => {
     setValue("userId", email);
   }, [email, setValue]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data: BoardFormInput) => {
+    console.log("ㅇㄴㄹㅁㄹㄴㅁ", data);
     console.log(JSON.stringify(data));
 
     axios.post(`http://localhost:9000/board/write`, data).then(() => {
