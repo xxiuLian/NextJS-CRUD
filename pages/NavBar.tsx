@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Register from "./Register";
+import Register from "./register";
 
 export default function NavBar() {
   let session = useSession();
@@ -42,7 +42,13 @@ export default function NavBar() {
           </Link>
         ) : null}
         {session.data == null || session.data == undefined ? (
-          <Register />
+          <button
+            onClick={() => {
+              location.href = "/register";
+            }}
+          >
+            횐 가입
+          </button>
         ) : null}
         <LoginBtn session={session} />
       </div>

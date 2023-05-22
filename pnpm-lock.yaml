@@ -49,6 +49,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-google-recaptcha:
+    specifier: ^2.1.0
+    version: 2.1.0(react@18.2.0)
   react-hook-form:
     specifier: ^7.43.9
     version: 7.43.9(react@18.2.0)
@@ -81,6 +84,9 @@ devDependencies:
   '@storybook/testing-library':
     specifier: ^0.0.14-next.2
     version: 0.0.14-next.2
+  '@types/react-google-recaptcha':
+    specifier: ^2.1.5
+    version: 2.1.5
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.59.2
     version: 5.59.2(@typescript-eslint/parser@5.59.2)(eslint@8.40.0)(typescript@5.0.4)
@@ -3694,6 +3700,12 @@ packages:
     dependencies:
       '@types/react': 18.2.6
     dev: false
+
+  /@types/react-google-recaptcha@2.1.5:
+    resolution: {integrity: sha512-iWTjmVttlNgp0teyh7eBXqNOQzVq2RWNiFROWjraOptRnb1OcHJehQnji0sjqIRAk9K0z8stjyhU+OLpPb0N6w==}
+    dependencies:
+      '@types/react': 18.2.6
+    dev: true
 
   /@types/react-is@17.0.4:
     resolution: {integrity: sha512-FLzd0K9pnaEvKz4D1vYxK9JmgQPiGk1lu23o1kqGsLeT0iPbRSF7b76+S5T9fD8aRa0B8bY7I/3DebEj+1ysBA==}
@@ -8383,6 +8395,16 @@ packages:
       unpipe: 1.0.0
     dev: true
 
+  /react-async-script@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
   /react-colorful@5.6.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
     peerDependencies:
@@ -8441,6 +8463,16 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-is: 18.1.0
     dev: true
+
+  /react-google-recaptcha@2.1.0(react@18.2.0):
+    resolution: {integrity: sha512-K9jr7e0CWFigi8KxC3WPvNqZZ47df2RrMAta6KmRoE4RUi7Ys6NmNjytpXpg4HI/svmQJLKR+PncEPaNJ98DqQ==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-async-script: 1.2.0(react@18.2.0)
+    dev: false
 
   /react-hook-form@7.43.9(react@18.2.0):
     resolution: {integrity: sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==}

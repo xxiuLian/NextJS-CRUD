@@ -3,7 +3,7 @@ import { signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Visible } from "./type";
 
-const LoginBtn = ({ session }) => {
+const LoginBtn = ({ session }): JSX.Element => {
   const [visible, setVisible] = useState(false);
 
   const onChange = () => {

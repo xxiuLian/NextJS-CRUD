@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
 import { UpdateFormGetData } from "../../type";
 
-const UpdateForm = () => {
+const UpdateForm = (): JSX.Element => {
   const router = useRouter();
   const [updateBoard, setUpdateBoard] = useState([]);
   // const [updateBoard, setUpdateBoard] = useState<UpdateFormGetData[]>([]);

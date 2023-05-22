@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { GetFormData } from "../../type";
 
-const Detail = (props) => {
+const Detail = () => {
   const session = useSession();
   console.log(session);
 
-  const [board, setBoard] = useState([]);
+  const [board, setBoard] = useState<GetFormData[]>([]);
   const router = useRouter();
 
   const getOneData = async () => {
@@ -19,15 +20,16 @@ const Detail = (props) => {
       console.log(res);
       const result = res.data.data;
       if (res.data.code === "2000") {
-        console.log(result);
+        console.log("dfsfadfa", result);
         setBoard(result);
       }
     });
   };
 
   useEffect(() => {
+    board;
     getOneData();
-  }, []);
+  }, [board]);
   return (
     <div>
       <h2>{board.boardTitle}</h2>

@@ -19,6 +19,22 @@ export type BoardFormInput = {
 
 //update > [id].tsx
 export type UpdateFormGetData = {
+  boardCategoryNo: number;
+  boardContent: string | number;
+  boardHit: number;
+  boardId: number;
+  boardOrder: number;
+  boardOriginFile: string;
+  boardRegDate: string;
+  boardTitle: string | number;
+  boardUpdateFile: string;
+  isDelete: string;
+  userId: string;
+};
+
+//get > [id].tsx
+export type GetFormData = {
+  boardCategoryNo: number;
   boardContent: string | number;
   boardHit: number;
   boardId: number;
