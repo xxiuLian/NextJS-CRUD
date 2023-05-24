@@ -15,6 +15,7 @@ export type BoardFormInput = {
   boardTitle: string | number;
   boardContent: string | number;
   userId: string;
+  recaptchaResponse: string;
 };
 
 //update > [id].tsx

@@ -9,14 +9,13 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const BoardForm = () => {
   let session = useSession();
-  const emailData: SessionEmail = session.data.user.email;
+  const emailData: SessionEmail = session ? session.data.user.email : null;
   const at = emailData.indexOf("@");
   const email = emailData.substring(0, at);
 
   const recaptchaRef = useRef(null);
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
 
-  const SECRET_KEY = process.env.RECAPTCHA_SECRETKEY;
   const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
   const handleRecaptchaVerify = () => {
@@ -42,15 +41,18 @@ const BoardForm = () => {
       //게시글 작성 로직
       await submitPost(data);
     } else {
-      alert("please verify reCAPTCHA before submitting the form");
+      alert("로봇 아니라면 췤해");
     }
   };
 
   const submitPost = async (data: BoardFormInput) => {
+    //기존 data에는 userid, boardContent, boardTitle만 있었고 recaptcha token을 추가했음
+    data.recaptchaResponse = recaptchaRef.current.getValue();
     try {
       const response = await axios
         .post(`http://localhost:9000/board/write`, data)
         .then(() => {
+          console.log("recaptcha", data);
           location.href = "/";
         });
 

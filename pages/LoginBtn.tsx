@@ -40,6 +40,7 @@ const LoginBtn = ({ session }): JSX.Element => {
           <button
             onClick={() => {
               signOut();
+              location.href = "/";
             }}
           >
             로그아웃

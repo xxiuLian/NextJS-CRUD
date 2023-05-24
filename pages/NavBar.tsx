@@ -10,7 +10,6 @@ import Register from "./register";
 
 export default function NavBar() {
   let session = useSession();
-  console.log(session.data);
   const router = useRouter();
   // console.log(router);
 
