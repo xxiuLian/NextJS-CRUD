@@ -13,8 +13,15 @@ const BoardForm = () => {
   const at = emailData.indexOf("@");
   const email = emailData.substring(0, at);
 
-  const SECRET_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
-  const SITE_KEY = process.env.RECAPTCHA_SECRETKEY;
+  const recaptchaRef = useRef(null);
+  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState(false);
+
+  const SECRET_KEY = process.env.RECAPTCHA_SECRETKEY;
+  const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
+
+  const handleRecaptchaVerify = () => {
+    setIsRecaptchaVerified(true);
+  };
 
   const {
     register,
@@ -27,31 +34,38 @@ const BoardForm = () => {
     setValue("userId", email);
   }, [email, setValue]);
 
-  const onSubmit = (data: BoardFormInput) => {
+  const onSubmit = async (data: BoardFormInput) => {
     console.log("ㅇㄴㄹㅁㄹㄴㅁ", data);
     console.log(JSON.stringify(data));
 
-    axios.post(`http://localhost:9000/board/write`, data).then(() => {
-      check_recaptcha();
-      location.href = "/";
-    });
+    if (isRecaptchaVerified) {
+      //게시글 작성 로직
+      await submitPost(data);
+    } else {
+      alert("please verify reCAPTCHA before submitting the form");
+    }
   };
 
-  const check_recaptcha = () => {
-    // var v = grecaptcha.getResponse();
-    // if (v.length == 0) {
-    //   alert("'로봇이 아닙니다.'를 체크해주세요.");
-    //   return false;
-    // } else {
-    //   location.reload();
-    //   return true;
-    // }
+  const submitPost = async (data: BoardFormInput) => {
+    try {
+      const response = await axios
+        .post(`http://localhost:9000/board/write`, data)
+        .then(() => {
+          location.href = "/";
+        });
+
+      if (response.status === 200) {
+        alert("post submitted successfully");
+      } else {
+        alert("Failed to submit the post");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="p-20">
-      <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeVkSsmAAAAAOFEYBiT2pn4b4DnqMbJSCcwTrHZ"></script>
-
       {session != null ? (
         <>
           <h3>글작성</h3>
@@ -60,7 +74,11 @@ const BoardForm = () => {
             <input defaultValue={email} name="userId" />
             제목 : <input {...register("boardTitle")} />
             내용 : <input {...register("boardContent")} />
-            <div className="g-recaptcha" data-sitekey={SITE_KEY}></div>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={SITE_KEY}
+              onChange={handleRecaptchaVerify}
+            />
             <button type="submit">등록</button>
           </form>
         </>
